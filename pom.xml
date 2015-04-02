@@ -1,12 +1,30 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  
   <groupId>com.samsix</groupId>
   <artifactId>s6-util</artifactId>
   <version>1.0.1-SNAPSHOT</version>
+  <name>SAMsix Utility Classes</name>
+  <description>SAMsix Utility Classes for use in other packages</description>
+  <url>http://samsix.com</url>
   
-  <scm>
-    <developerConnection>scm:git:git@github.com:SamSix/s6-util.git</developerConnection>
-  </scm>
+    <licenses>
+    	<license>
+    		<name>MIT license</name>
+    		<url>http://opensource.org/licenses/MIT</url>
+    		<distribution>repo</distribution>
+    	</license>
+    </licenses>
+	
+    <scm>
+        <developerConnection>scm:git:git@github.com:SamSix/s6-util.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+  
+    <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
   
   <distributionManagement>
       <snapshotRepository>
@@ -20,64 +38,118 @@
   </distributionManagement>
 
   <build>
-    <sourceDirectory>src/main/java</sourceDirectory>
-    <plugins>
-        <plugin>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.1</version>
-            <configuration>
-                <source>1.6</source>
-                <target>1.6</target>
-            </configuration>
-        </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>2.9.1</version>
-            <configuration>
-                <additionalparam>-Xdoclint:none</additionalparam>
-            </configuration>
-        </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-release-plugin</artifactId>
-            <version>2.5.1</version>
-        </plugin>
-    </plugins>
+    <!--<sourceDirectory>src/main/java</sourceDirectory>-->
+		<pluginManagement>
+		     <plugins>
+				 <plugin>
+					 <groupId>org.apache.maven.plugins</groupId>
+					 <artifactId>maven-release-plugin</artifactId>
+					 <version>2.5</version>
+					 <configuration>
+						 <useReleaseProfile>false</useReleaseProfile>
+						 <releaseProfiles>release</releaseProfiles>
+						 <goals>deploy</goals>
+					 </configuration>
+				 </plugin>
+		     </plugins>
+		</pluginManagement>
+		
+		<plugins>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.3</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-plugin-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<!-- see http://jira.codehaus.org/browse/MNG-5346 -->
+					<skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+				</configuration>
+					<executions>
+					  <execution>
+						<id>mojo-descriptor</id>
+						<goals>
+							<goal>descriptor</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5</version>
+			</plugin>
+		</plugins>
   </build>
   
-  <profiles>
-    <profile>
-      <id>release-sign-artifacts</id>
-      <activation>
-        <property>
-          <name>performRelease</name>
-          <value>true</value>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <configuration>
-                <useAgent>true</useAgent>
-            </configuration>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
-  
+	<profiles>
+	  <profile>
+	    <id>release</id>
+	    <build>
+	      <plugins>
+  			<plugin>
+  				<groupId>org.apache.maven.plugins</groupId>
+  				<artifactId>maven-source-plugin</artifactId>
+  				<version>2.2.1</version>
+  				<executions>
+  					<execution>
+  						<id>attach-sources</id>
+  						<goals>
+  							<goal>jar-no-fork</goal>
+  						</goals>
+  					</execution>
+  				</executions>
+  			</plugin>
+  			<plugin>
+  				<groupId>org.apache.maven.plugins</groupId>
+  				<artifactId>maven-javadoc-plugin</artifactId>
+  				<version>2.9.1</version>
+  				<executions>
+  					<execution>
+  						<id>attach-javadocs</id>
+  						<goals>
+  							<goal>jar</goal>
+  						</goals>
+  					</execution>
+  				</executions>
+  			</plugin>
+	        <plugin>
+	          <groupId>org.apache.maven.plugins</groupId>
+	          <artifactId>maven-gpg-plugin</artifactId>
+	          <version>1.5</version>
+	          <executions>
+	            <execution>
+	              <id>sign-artifacts</id>
+	              <phase>verify</phase>
+	              <goals>
+	                <goal>sign</goal>
+	              </goals>
+	            </execution>
+	          </executions>
+	        </plugin>
+	      </plugins>
+	    </build>
+	  </profile>
+	</profiles>
+	
+	  
   <dependencies>
     <dependency>
       <groupId>log4j</groupId>
