@@ -18,6 +18,7 @@
 	
     <scm>
         <developerConnection>scm:git:git@github.com:SamSix/s6-util.git</developerConnection>
+        <url>git@github.com:SamSix/s6-util.git</url>
         <tag>HEAD</tag>
     </scm>
   
@@ -94,7 +95,6 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.5</version>
 			</plugin>
 		</plugins>
   </build>
