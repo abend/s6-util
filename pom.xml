@@ -17,8 +17,9 @@
     </licenses>
 	
     <scm>
+        <connection>scm:git:https://github.com/SamSix/s6-util.git</connection>
         <developerConnection>scm:git:git@github.com:SamSix/s6-util.git</developerConnection>
-        <url>git@github.com:SamSix/s6-util.git</url>
+        <url>https://github.com/SamSix/s6-util.git</url>
         <tag>HEAD</tag>
     </scm>
   
