@@ -15,10 +15,20 @@
     		<distribution>repo</distribution>
     	</license>
     </licenses>
-	
+    
+	<developers>
+        <developer>
+          <name>Ken Southerland</name>
+          <email>southerland@samsix.com</email>
+          <organization>SAMsix</organization>
+          <organizationUrl>http://www.samsix.com</organizationUrl>
+        </developer>
+    </developers>
+
     <scm>
+        <connection>scm:git:git@github.com:SamSix/s6-util.git</connection>
         <developerConnection>scm:git:git@github.com:SamSix/s6-util.git</developerConnection>
-        <tag>HEAD</tag>
+        <url>git@github.com:SamSix/s6-util.git</url>
     </scm>
   
     <properties>
@@ -94,7 +104,6 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.5</version>
 			</plugin>
 		</plugins>
   </build>
