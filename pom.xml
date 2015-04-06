@@ -3,7 +3,7 @@
   
   <groupId>com.samsix</groupId>
   <artifactId>s6-util</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1</version>
   <name>SAMsix Utility Classes</name>
   <description>SAMsix Utility Classes for use in other packages</description>
   <url>http://samsix.com</url>
@@ -29,7 +29,8 @@
         <connection>scm:git:git@github.com:SamSix/s6-util.git</connection>
         <developerConnection>scm:git:git@github.com:SamSix/s6-util.git</developerConnection>
         <url>git@github.com:SamSix/s6-util.git</url>
-    </scm>
+      <tag>s6-util-1.0.1</tag>
+  </scm>
   
     <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
